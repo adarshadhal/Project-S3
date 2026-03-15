@@ -9,6 +9,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
+import org.springframework.security.web.csrf.XorCsrfTokenRequestAttributeHandler;
 
 @Configuration
 @EnableWebSecurity
@@ -30,6 +32,11 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+
+        // ✅ Use cookie-based CSRF — works with any context path (/myapp or ROOT)
+        CookieCsrfTokenRepository csrfRepo = CookieCsrfTokenRepository.withHttpOnlyFalse();
+        XorCsrfTokenRequestAttributeHandler requestHandler = new XorCsrfTokenRequestAttributeHandler();
+
         http
             .authenticationProvider(authenticationProvider())
             .authorizeHttpRequests(auth -> auth
@@ -52,11 +59,14 @@ public class SecurityConfig {
             .logout(logout -> logout
                 .logoutUrl("/logout")
                 .logoutSuccessUrl("/login?logout=true")
-                .deleteCookies("JSESSIONID", "remember-me")
+                .deleteCookies("JSESSIONID", "remember-me", "XSRF-TOKEN")
                 .invalidateHttpSession(true)
                 .permitAll()
             )
+            // ✅ Cookie-based CSRF works with /myapp context path
             .csrf(csrf -> csrf
+                .csrfTokenRepository(csrfRepo)
+                .csrfTokenRequestHandler(requestHandler)
                 .ignoringRequestMatchers("/h2-console/**")
             )
             .headers(headers -> headers
