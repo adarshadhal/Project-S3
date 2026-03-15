@@ -226,15 +226,15 @@
 
   <nav class="sb-body">
     <div class="nav-label">Menu</div>
-    <a href="/dashboard" class="nav-link active"><span class="nav-ic">⬡</span>Dashboard</a>
-    <a href="/records" class="nav-link">
+    <a th:href="@{/dashboard}" class="nav-link active"><span class="nav-ic">⬡</span>Dashboard</a>
+    <a th:href="@{/records}" class="nav-link">
       <span class="nav-ic">☰</span>All Records
       <span class="nav-badge" th:text="${totalRecords}">0</span>
     </a>
-    <a href="/records/new" class="nav-link"><span class="nav-ic">✦</span>New Record</a>
+    <a th:href="@{/records/new}" class="nav-link"><span class="nav-ic">✦</span>New Record</a>
     <div class="nav-label">Developer</div>
-    <a href="/api/records" class="nav-link" target="_blank"><span class="nav-ic">⟨⟩</span>JSON API</a>
-    <a href="/h2-console" class="nav-link" target="_blank"><span class="nav-ic">🗄</span>DB Console</a>
+    <a th:href="@{/api/records}" class="nav-link" target="_blank"><span class="nav-ic">⟨⟩</span>JSON API</a>
+    <a th:href="@{/h2-console}" class="nav-link" target="_blank"><span class="nav-ic">🗄</span>DB Console</a>
   </nav>
 
   <div class="sb-foot">
@@ -260,7 +260,7 @@
       <h1>Hello, <span th:text="${user.fullName.split(' ')[0]}">User</span> 👋</h1>
       <p>Here's your MyApp overview — records stored securely on AWS S3</p>
     </div>
-    <a href="/records/new" class="btn-new">✦ New Record</a>
+    <a th:href="@{/records/new}" class="btn-new">✦ New Record</a>
   </div>
 
   <div th:if="${successMessage}" class="alert as fade-up">✓ <span th:text="${successMessage}"></span></div>
@@ -297,33 +297,33 @@
   <!-- Actions -->
   <div class="sec-hd fade-up"><h2>Quick Actions</h2></div>
   <div class="actions">
-    <a href="/records/new" class="act-card ac1 fade-up fade-up-1">
+    <a th:href="@{/records/new}" class="act-card ac1 fade-up fade-up-1">
       <div class="act-ico">✦</div>
       <div><div class="act-title">Create Record</div><div class="act-sub">Save a new entry to S3</div></div>
     </a>
-    <a href="/records" class="act-card ac2 fade-up fade-up-2">
+    <a th:href="@{/records}" class="act-card ac2 fade-up fade-up-2">
       <div class="act-ico">◈</div>
       <div><div class="act-title">View All Records</div><div class="act-sub">Browse &amp; search data</div></div>
     </a>
-    <a href="/api/records" class="act-card ac3 fade-up fade-up-3" target="_blank">
+    <a th:href="@{/api/records}" class="act-card ac3 fade-up fade-up-3" target="_blank">
       <div class="act-ico">⟨⟩</div>
       <div><div class="act-title">JSON API</div><div class="act-sub">Raw records endpoint</div></div>
     </a>
   </div>
 
   <!-- Table -->
-  <div class="sec-hd fade-up"><h2>Recent Records</h2><a href="/records">View all →</a></div>
+  <div class="sec-hd fade-up"><h2>Recent Records</h2><a th:href="@{/records}">View all →</a></div>
   <div class="tbl-wrap fade-up">
     <div class="tbl-head">
       <h3>My Latest Entries</h3>
-      <a href="/records" class="view-all-btn">See All →</a>
+      <a th:href="@{/records}" class="view-all-btn">See All →</a>
     </div>
 
     <div th:if="${#lists.isEmpty(userRecords)}" class="empty-state">
       <div class="empty-icon">📭</div>
       <div class="empty-title">No records yet</div>
       <div class="empty-desc">Create your first record and it will appear here.</div>
-      <a href="/records/new" class="empty-cta">Create First Record</a>
+      <a th:href="@{/records/new}" class="empty-cta">Create First Record</a>
     </div>
 
     <table th:if="${!#lists.isEmpty(userRecords)}">
