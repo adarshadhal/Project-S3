@@ -113,11 +113,11 @@
   </div>
   <nav class="sb-body">
     <div class="nav-label">Menu</div>
-    <a href="/dashboard" class="nav-link"><span class="nav-ic">⬡</span>Dashboard</a>
-    <a href="/records" class="nav-link active"><span class="nav-ic">☰</span>All Records</a>
-    <a href="/records/new" class="nav-link"><span class="nav-ic">✦</span>New Record</a>
+    <a th:href="@{/dashboard}" class="nav-link"><span class="nav-ic">⬡</span>Dashboard</a>
+    <a th:href="@{/records}" class="nav-link active"><span class="nav-ic">☰</span>All Records</a>
+    <a th:href="@{/records/new}" class="nav-link"><span class="nav-ic">✦</span>New Record</a>
     <div class="nav-label">Developer</div>
-    <a href="/api/records" class="nav-link" target="_blank"><span class="nav-ic">⟨⟩</span>JSON API</a>
+    <a th:href="@{/api/records}" class="nav-link" target="_blank"><span class="nav-ic">⟨⟩</span>JSON API</a>
   </nav>
   <div class="sb-foot">
     <div class="user-card">
@@ -135,7 +135,7 @@
 <main class="main">
   <div class="topbar fade-up">
     <div><h1>All Records</h1><p>Viewing all data stored in AWS S3 — live</p></div>
-    <a href="/records/new" class="btn-new">✦ New Record</a>
+    <a th:href="@{/records/new}" class="btn-new">✦ New Record</a>
   </div>
 
   <div th:if="${successMessage}" class="alert as fade-up">✓ <span th:text="${successMessage}"></span></div>
@@ -173,7 +173,7 @@
       <div class="empty-icon">📭</div>
       <div class="empty-title">No records in S3 yet</div>
       <div class="empty-desc">Create your first data record and it will appear here.</div>
-      <a href="/records/new" class="empty-cta">Create First Record</a>
+      <a th:href="@{/records/new}" class="empty-cta">Create First Record</a>
     </div>
 
     <table th:if="${!#lists.isEmpty(records)}">
