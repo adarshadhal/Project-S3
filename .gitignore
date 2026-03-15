@@ -1,4 +1,4 @@
-target/
+
 *.war
 *.jar
 .mvn/
